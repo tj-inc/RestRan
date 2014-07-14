@@ -1,6 +1,13 @@
 #logo {
 	height: 100px;
 	clear: right;
+	font-family: Arial, sans-serif;
+	font-size: 50px;
+}
+
+#logotext {
+	margin-top: 21px;
+	display: inline-block;
 }
 
 #main {
@@ -28,6 +35,10 @@
 	width: 300px;
 	height: 30px;
 	border-radius: 100px;
+	font-family: Arial, sans-serif;
+	font-size: 20px;
+	padding-top: 5px;
+	padding-bottom: 5px;
 }
 
 .item {
