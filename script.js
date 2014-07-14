@@ -55,10 +55,10 @@ function stop(){
 }
 	
 function setTimer() {
-		$(".item").animate({top:"-=60"}, 100);
+		$(".item").animate({top:"-=60"}, 50);
 		$("#" + (index % 4)).animate({top:"+=240"}, 0);					
 		$("#" + (index % 4)).html(items[(index + 4) % 39].name);
 		index++;
-		timer = setTimeout('setTimer()',100);
+		timer = setTimeout('setTimer()', 50);
 }
 	
