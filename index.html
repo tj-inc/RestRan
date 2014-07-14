@@ -1,27 +1,32 @@
 <!DOCTYPE html>
+	
 <html>
+	
 	<head>
+		<meta charset="UTF-8"/>
 		<title>Operation Eat-It!!!</title>
-        <link rel='stylesheet' type='text/css' href='stylesheet.css'/>
-        <!--<link rel='stylesheet' type='text/css' href='http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css'/>-->
-        <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <!--<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>-->
-        <script type='text/javascript' src='script.js'></script>
+		<link rel='stylesheet' type='text/css' href='stylesheet.css'/>
+		<!--<link rel='stylesheet' type='text/css' href='http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css'/>-->
+		<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<!--<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>-->
+		<script type='text/javascript' src='script.js'></script>
 	</head>
+	
 	<body style='width: 500px;height: 500px;margin: auto;'>
 		<div id='logo'><span id='logotext'>Operation Eat-It!!!<span></div>
 		<div id='main'>
 			<div id='edge'>
 				<div id='queue'>
-					<div class='item' id='1'></div>
-					<div class='item' id='2'></div>
-					<div class='item' id='3'></div>
-					<div class='item' id='4'></div>
+					<div class='item' id='0'>苏氏牛肉面</div>
+					<div class='item' id='1'>吉野家</div>
+					<div class='item' id='2'>DQ</div>
+					<div class='item' id='3'>红薯地瓜坊</div>
 				</div>
 			</div>
-			<button class='button' id='start'>Start!!!</button>
-			<button class='button hide' id='stop'>Stop!!!</button>
+			<button class='button' id='start' onclick="start();">Start!!!</button>
+			<button class='button hide' id='stop' onclick="stop();">Stop!!!</button>
 		</div>
 		<div id='footing'>This site is created by JiaHang Li and Zhou Zhou!</div>
 	</body>
+	
 </html>
