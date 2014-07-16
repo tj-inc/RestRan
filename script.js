@@ -39,21 +39,27 @@ var items = [{name:"苏氏牛肉面",logo:""},
 		    {name:"霄云羊杂割",logo:""}];
 	
 var index = 0;
-var timer;
-	
-function start(){
-		//To Do: Write the function to move the options and change the options as well
-		document.getElementById("start").setAttribute("class", "btn btn-primary btn-lg btn-block hide");
-		document.getElementById("stop").setAttribute("class", "btn btn-primary btn-lg btn-block");
-		setTimer();
+var timer = 0;
+var isActive = false;
+var theButton = document.getElementById("roll");
+function roll(){
+		//To Do: Tell whether the queue is rolling, and start or stop the rolling respectively while changing the active state of the button.
+		if (!isActive)
+		{
+			theButton.setAttribute("class", "btn btn-danger btn-lg btn-block active");
+			isActive = true;
+			theButton.innerHTML="Click to Stop!!!";
+			setTimer();
+		}
+		else
+		{
+			theButton.setAttribute("class", "btn btn-warning btn-lg btn-block");
+			isActive = false;
+			theButton.innerHTML="Click to Start!!!";
+			clearTimeout(timer);
+		}
 }
-	
-function stop(){
-		document.getElementById("start").setAttribute("class", "btn btn-primary btn-lg btn-block");
-		document.getElementById("stop").setAttribute("class", "btn btn-primary btn-lg btn-block hide");
-		clearTimeout(timer);
-}
-	
+
 function setTimer() {
 		$(".item").animate({top:"-=50"}, 50);
 		$("#" + (index % 4)).animate({top:"+=200"}, 0);					
