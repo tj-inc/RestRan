@@ -33,10 +33,10 @@
 				<div class='col-md-4'>
 					<div id='edge'>
 						<div id='queue'>
-							<button type="button" class='item btn btn-info btn-lg btn-block' id='0'>苏氏牛肉面</button>
-							<button type="button" class='item btn btn-info btn-lg btn-block' id='1'>吉野家</button>
-							<button type="button" class='item btn btn-info btn-lg btn-block' id='2'>DQ</button>
-							<button type="button" class='item btn btn-info btn-lg btn-block' id='3'>红薯地瓜坊</button>
+							<button type="button" class='item btn btn-info btn-lg btn-block' id='0' data-toggle="modal" data-target="#myModal" onclick="moreInfo(0);">苏氏牛肉面</button>
+							<button type="button" class='item btn btn-info btn-lg btn-block' id='1' data-toggle="modal" data-target="#myModal" onclick="moreInfo(1);">吉野家</button>
+							<button type="button" class='item btn btn-info btn-lg btn-block' id='2' data-toggle="modal" data-target="#myModal" onclick="moreInfo(2);">DQ</button>
+							<button type="button" class='item btn btn-info btn-lg btn-block' id='3' data-toggle="modal" data-target="#myModal" onclick="moreInfo(3);">红薯地瓜坊</button>
 						</div>
 					</div>
 				</div>
@@ -53,7 +53,24 @@
 			<div id='footing' class='row' style='margin-top:50px;'>
 				<div class='col-md-3 col-md-offset-8'>This site is created by JiaHang Li and Zhou Zhou!
 				</div>
-			</div>	
+			</div>
+			<!-- Modal from Bootstrap example -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  				<div class="modal-dialog">
+    				<div class="modal-content">
+     					<div class="modal-header">
+        					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        					<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      					</div>
+      					<div class="modal-body">
+        					1234567890
+      					</div>
+      					<div class="modal-footer">
+        					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      					</div>
+    				</div>
+  				</div>
+			</div>
 		</div>
 		<script type='text/javascript' src='script.js'></script>
 		<script src="src/jquery-2.1.1.min.js"></script>

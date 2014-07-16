@@ -42,12 +42,14 @@ var index = 0;
 var timer = 0;
 var isActive = false;
 var theButton = document.getElementById("roll");
+var theItem;
 function roll(){
 		//To Do: Tell whether the queue is rolling, and start or stop the rolling respectively while changing the active state of the button.
 		if (!isActive)
 		{
 			theButton.setAttribute("class", "btn btn-danger btn-lg btn-block active");
 			isActive = true;
+			$('.item').addClass('disabled');
 			theButton.innerHTML="Click to Stop!!!";
 			setTimer();
 		}
@@ -55,8 +57,9 @@ function roll(){
 		{
 			theButton.setAttribute("class", "btn btn-warning btn-lg btn-block");
 			isActive = false;
-			theButton.innerHTML="Click to Start!!!";
+			theItem.setAttribute("class", "item btn btn-info btn-lg btn-block");
 			clearTimeout(timer);
+			theButton.innerHTML="Click to Start!!!";
 		}
 }
 
@@ -65,6 +68,10 @@ function setTimer() {
 		$("#" + (index % 4)).animate({top:"+=200"}, 0);					
 		$("#" + (index % 4)).html(items[(index + 4) % 39].name);
 		index++;
+		theItem = document.getElementById("" + (index % 4 + 1) % 4);
 		timer = setTimeout('setTimer()', 50);
 }
-	
+
+function moreInfo(num) {
+		document.getElementById("myModalLabel").innerHTML = document.getElementById(""+num).innerHTML;
+}
