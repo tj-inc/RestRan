@@ -6,30 +6,57 @@
     	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Operation Eat-It!!!</title>
-		<!--<link rel='stylesheet' type='text/css' href='stylesheet.css'/>-->
+		<link rel='stylesheet' type='text/css' href='stylesheet.css'/>
 		<link rel='stylesheet' type='text/css' href='src/bootstrap-3.2.0/css/bootstrap.min.css'/>
     	<!--[if lt IE 9]>
       		<script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       		<script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     	<![endif]-->
-		<!--<script type='text/javascript' src='script.js'></script>-->
 	</head>
 	
-	<body style='width: 500px;height: 500px;margin: auto;'>
-		<div id='logo'><span id='logotext'>Operation Eat-It!!!</span></div>
-		<div id='main'>
-			<div id='edge'>
-				<div id='queue'>
-					<div class='item' id='0'>苏氏牛肉面</div>
-					<div class='item' id='1'>吉野家</div>
-					<div class='item' id='2'>DQ</div>
-					<div class='item' id='3'>红薯地瓜坊</div>
+	<body>
+		<div class='container'>
+			<div id='logo' class='row'>
+				<div class='col-md-2'>
+				</div>
+				<div class='col-md-3'>
+					<h1 id='logotext'>Operation Eat-It!!!</h1>
+				</div>
+				<div class='col-md-7'>
 				</div>
 			</div>
-			<button class='button' id='start' onclick="start();">Start!!!</button>
-			<button class='button hide' id='stop' onclick="stop();">Stop!!!</button>
+			<div id='main' class='row'>
+				<div class='col-md-3'>
+				</div>
+				<div class='col-md-1'>
+				</div>
+				<div class='col-md-4'>
+					<div id='edge'>
+						<div id='queue'>
+							<div class='item' id='0'>苏氏牛肉面</div>
+							<div class='item' id='1'>吉野家</div>
+							<div class='item' id='2'>DQ</div>
+							<div class='item' id='3'>红薯地瓜坊</div>
+						</div>
+					</div>
+					<button type='button' class='btn btn-primary btn-lg btn-block' id='start' onclick="start();">Start!!!</button>
+					<button type='button' class='btn btn-primary btn-lg btn-block hide' id='stop' onclick="stop();">Stop!!!</button>
+				</div>
+				<div class='col-md-1'>
+				</div>
+				<div class='col-md-3'>
+				</div>
+			</div>
+			<div id='footing' class='row'>
+				<div class='col-md-4'>
+				</div>
+				<div class='col-md-4'>This site is created by JiaHang Li and Zhou Zhou!
+				</div>
+				<div class='col-md-4'>
+				</div>
+			</div>	
 		</div>
-		<div id='footing'>This site is created by JiaHang Li and Zhou Zhou!</div>
+		<script type='text/javascript' src='script.js'></script>
 		<script src="src/jquery-2.1.1.min.js"></script>
 		<script src="src/bootstrap-3.2.0/js/bootstrap.min.js"></script>
 	</body>

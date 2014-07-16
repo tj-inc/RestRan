@@ -1,4 +1,4 @@
-#logo {
+/*#logo {
 	height: 100px;
 	clear: right;
 	font-family: Arial, sans-serif;
@@ -20,13 +20,6 @@
 	text-align: center;
 }
 
-#edge {
-	margin: auto;
-	border: 5px solid black;
-	width: 300px;
-	height: 180px;
-	overflow: hidden;
-}
 
 .button {
 	background-color: #00FFFF;
@@ -61,16 +54,27 @@
 	opacity: 0.5;
 }
 
-.item {
-	border: 5px solid blue;
-	border-radius: 10px;
-	width: 290px;
-	height: 50px;
-	position: relative;
+
+*/
+
+#edge {
+	margin: auto;
+	border: 5px solid black;
+	/*width: 300px;*/
+	height: 160px;/* Why 160??? */
+	overflow: hidden;
 }
 
 #queue {
-	width: 300px;
+	/*width: 300px;*/
 	margin: auto;
 	z-index: -1;
+}
+
+.item {
+	border: 5px solid blue;
+	border-radius: 10px;
+	/*width: 290px;*/
+	height: 50px;
+	position: relative;
 }

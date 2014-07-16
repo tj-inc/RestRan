@@ -43,20 +43,20 @@ var timer;
 	
 function start(){
 		//To Do: Write the function to move the options and change the options as well
-		document.getElementById("start").setAttribute("class", "button hide");
-		document.getElementById("stop").setAttribute("class", "button");
+		document.getElementById("start").setAttribute("class", "btn btn-primary btn-lg btn-block hide");
+		document.getElementById("stop").setAttribute("class", "btn btn-primary btn-lg btn-block");
 		setTimer();
 }
 	
 function stop(){
-		document.getElementById("start").setAttribute("class", "button");
-		document.getElementById("stop").setAttribute("class", "button hide");
+		document.getElementById("start").setAttribute("class", "btn btn-primary btn-lg btn-block");
+		document.getElementById("stop").setAttribute("class", "btn btn-primary btn-lg btn-block hide");
 		clearTimeout(timer);
 }
 	
 function setTimer() {
-		$(".item").animate({top:"-=60"}, 50);
-		$("#" + (index % 4)).animate({top:"+=240"}, 0);					
+		$(".item").animate({top:"-=50"}, 50);
+		$("#" + (index % 4)).animate({top:"+=200"}, 0);					
 		$("#" + (index % 4)).html(items[(index + 4) % 39].name);
 		index++;
 		timer = setTimeout('setTimer()', 50);
