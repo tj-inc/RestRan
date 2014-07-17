@@ -49,7 +49,7 @@ function roll(){
 		{
 			theButton.setAttribute("class", "btn btn-danger btn-lg btn-block active");
 			isActive = true;
-			$('.item').addClass('disabled');
+			$('.item').attr("class", "item btn btn-info btn-lg btn-block disabled");
 			theButton.innerHTML="Click to Stop!!!";
 			setTimer();
 		}
@@ -57,7 +57,7 @@ function roll(){
 		{
 			theButton.setAttribute("class", "btn btn-warning btn-lg btn-block");
 			isActive = false;
-			theItem.setAttribute("class", "item btn btn-info btn-lg btn-block");
+			theItem.setAttribute("class", "item btn btn-success btn-lg btn-block");
 			clearTimeout(timer);
 			theButton.innerHTML="Click to Start!!!";
 		}
