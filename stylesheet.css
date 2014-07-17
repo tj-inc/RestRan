@@ -72,6 +72,7 @@
 }
 
 .item {
+	margin: auto;
 	border: 5px solid blue;
 	border-radius: 10px;
 	/*width: 290px;*/
