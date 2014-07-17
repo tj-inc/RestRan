@@ -43,6 +43,7 @@ var timer = 0;
 var isActive = false;
 var theButton = document.getElementById("roll");
 var theItem;
+var theItemIndex;
 function roll(){
 		//To Do: Tell whether the queue is rolling, and start or stop the rolling respectively while changing the active state of the button.
 		if (!isActive)
@@ -74,4 +75,15 @@ function setTimer() {
 
 function moreInfo(num) {
 		document.getElementById("myModalLabel").innerHTML = document.getElementById(""+num).innerHTML;
+		if (index==0)
+		{
+			document.getElementById("myModalBody").innerHTML = items[num].name;
+
+		}
+		else
+		{
+			theItemIndex = (index + 1) % 39 /* Why plus 1, not 2??? */
+			document.getElementById("myModalBody").innerHTML = items[theItemIndex].name;
+		}
+
 }
