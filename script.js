@@ -58,8 +58,8 @@ function roll(){
 		{
 			theButton.setAttribute("class", "btn btn-warning btn-lg btn-block");
 			isActive = false;
-			theItem.setAttribute("class", "item btn btn-success btn-lg btn-block");
 			clearTimeout(timer);
+			theItem.setAttribute("class", "item btn btn-success btn-lg btn-block");
 			theButton.innerHTML="Click to Start!!!";
 		}
 }
