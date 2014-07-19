@@ -49,7 +49,6 @@ function roll(){
 		{
 			theButton.setAttribute("class", "btn btn-danger btn-lg btn-block active");
 			isActive = true;
-			$('.item').attr("class", "item btn btn-info btn-lg btn-block disabled");
 			theButton.innerHTML="Click to Stop!!!";
 			setTimer();
 		}
@@ -76,13 +75,6 @@ function moreInfo(num) {
 	if (index!=0)
 	{
 		num = (index + 1) % 39 /* Why plus 1, not 2??? */
-		document.getElementById("myModalLabel").innerHTML = "Congratulations!";
-		$("#modalText").show();
-	}
-	else
-	{
-		document.getElementById("myModalLabel").innerHTML = "Information";
-		$("#modalText").hide();
 	}
 	document.getElementById("restName").innerHTML = items[num].name;
 //Baidu Map API
