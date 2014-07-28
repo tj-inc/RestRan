@@ -73,12 +73,11 @@ function setTimer() {
 }
 
 function moreInfo(num) {
-	if (index!=0)
-	{
-		num = (index + 1) % 39 /* Why plus 1, not 2??? */
-	}
+	if (index!=0) num = (index + 1) % 39;
+	
 	document.getElementById("restName").innerHTML = items[num].name;
-//Baidu Map API
+	
+	//Baidu Map API
 	var map = new BMap.Map("container");
 	map.centerAndZoom(new BMap.Point(items[num].lat,items[num].lng), 13);
 	map.enableScrollWheelZoom();
