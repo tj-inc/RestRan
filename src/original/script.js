@@ -12,12 +12,17 @@ restran.directive("main", function(){
 	return {restrict: "E", 
 			templateUrl: "src/original/main.html",
 			controller: function(){
-//-----------------------------------------------------------------------------------------------------------------------------
-/*var index = 0;
+//-----------------------------------------------------------------------------------------------------------------------------				
+var myself = this;
+var items = this.items = [];
+var index = 0;
 var timer = 0;
 var isActive = false;
+var theItem;
 var theButton = document.getElementById("roll");
 var thePrompt = document.getElementById("thePrompt");
+$.getJSON("src/rest-list.json", function(data){items = data;});
+
 this.roll = function(){
 		//To Do: Tell whether the queue is rolling, and start or stop the rolling respectively while changing the active state of the button.
 		if (!isActive)
@@ -25,7 +30,7 @@ this.roll = function(){
 			theButton.setAttribute("class", "btn btn-danger btn-lg btn-block active");
 			isActive = true;
 			theButton.innerHTML="Click to Stop!!!";
-			setTimer();
+			myself.setTimer();
 		}
 		else
 		{
@@ -39,16 +44,13 @@ this.roll = function(){
 		}
 }
 
-this.setTimer = function() {
-		$(".item").animate({top:"-=50"}, 50);
-		$("#" + (index % 4)).animate({top:"+=200"}, 0);					
-		$("#" + (index % 4)).html(items[(index + 4) % 39].name);
-		index++;
-		theItem = document.getElementById("" + (index % 4 + 1) % 4);
-		timer = setTimeout('setTimer()', 60);
-}*/
-this.roll = function(){
+this.setTimer = function(){
 	$(".item").animate({top:"-=50"}, 50);
+	$("#" + (index % 4)).animate({top:"+=200"}, 0);					
+	$("#" + (index % 4)).html(items[(index + 4) % 39].name);
+	index++;
+	theItem = document.getElementById("" + (index % 4 + 1) % 4);
+	timer = setTimeout(function(){myself.setTimer()},60)
 };
 //-----------------------------------------------------------------------------------------------------------------------------
 			},
