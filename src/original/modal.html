@@ -1,0 +1,22 @@
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h1 class="modal-title" id="myModalLabel">Congratulations!</h1>
+      </div>
+      <div class="modal-body" id="myModalBody">
+        <div id='moreInfo'>
+          <h2 style='text-align:center' id="modalText">Here is your restaurant for today:</h2><br>
+          <h3 style='display:inline-block;'>Name: <span id='restName'></span></h3>
+          <h3>Map:</h3>
+        </div>
+        <div style="margin:auto;width:400px;height:300px;border:1px solid gray;" id="container"></div>
+        <h5>You can only roll the dice once per load, but don't worry! If you don't like your result, you can <a href='javascript:location.reload([true])'>refresh the page</a> to try it again!</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
