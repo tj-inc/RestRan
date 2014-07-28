@@ -12,10 +12,6 @@ restran.directive("main", function(){
 	return {restrict: "E", templateUrl: "src/original/main.html"};
 });
 
-restran.directive("row", function(){
-	return {restrict: "E", templateUrl: "src/original/row.html"};
-});
-
 restran.directive("footing", function(){
 	return {restrict: "E", templateUrl: "src/original/footing.html"};
 });
@@ -69,6 +65,7 @@ var items = [{name:"苏氏牛肉面",lat:"116.469316",lng:"39.962848",addr:"北�
 		    {name:"食立方",lat:"116.471345",lng:"39.964106",addr:"北京朝阳区霄云路32号(鹏润大厦西)",tel:"(010)64682199"},
 		    {name:"山西刀削面",lat:"116.471382",lng:"39.96414",addr:"朝阳区三元桥东桥霄云路32号(距离三元桥站约760米)",tel:"N/A"},
 		    {name:"霄云羊杂割",lat:"116.468265",lng:"39.962108",addr:"北京市朝阳区霄云路8(农业银行旁)",tel:"(010)53599311,15201544336"}];
+
 var index = 0;
 var timer = 0;
 var isActive = false;
