@@ -7,10 +7,10 @@
 	<div class='col-md-4'>
 		<div id='edge'>
 			<div id='queue'>
-				<button type="button" class='item btn btn-info btn-lg btn-block disabled' id='0' data-toggle="modal" data-target="Modal" onclick="moreInfo(0);" style="margin:auto;">苏氏牛肉面</button>
-				<button type="button" class='item btn btn-info btn-lg btn-block disabled' id='1' data-toggle="modal" data-target="#myModal" onclick="moreInfo(1);" style="margin:auto;">吉野家</button>
-				<button type="button" class='item btn btn-info btn-lg btn-block disabled' id='2' data-toggle="modal" data-target="#myModal" onclick="moreInfo(2);" style="margin:auto;">DQ</button>
-				<button type="button" class='item btn btn-info btn-lg btn-block disabled' id='3' data-toggle="modal" data-target="#myModal" onclick="moreInfo(3);" style="margin:auto;">红薯地瓜坊</button>
+				<button class='item btn btn-info btn-lg btn-block disabled' id='0' data-toggle="modal" data-target="Modal" onclick="moreInfo(0);" style="margin:auto;">苏氏牛肉面</button>
+				<button class='item btn btn-info btn-lg btn-block disabled' id='1' data-toggle="modal" data-target="#myModal" onclick="moreInfo(1);" style="margin:auto;">吉野家</button>
+				<button class='item btn btn-info btn-lg btn-block disabled' id='2' data-toggle="modal" data-target="#myModal" onclick="moreInfo(2);" style="margin:auto;">DQ</button>
+				<button class='item btn btn-info btn-lg btn-block disabled' id='3' data-toggle="modal" data-target="#myModal" onclick="moreInfo(3);" style="margin:auto;">红薯地瓜坊</button>
 			</div>
 		</div>
 	</div>
@@ -23,6 +23,6 @@
 
 <div class='row' style='margin-top:10px;'>
 	<div id='button' class='col-md-4 col-md-offset-4'>
-		<button type='button' class='btn btn-warning btn-lg btn-block' id='roll' onclick="roll();">Click to Start!!!</button>
+		<button class='btn btn-warning btn-lg btn-block' id='roll' ng-click="mCtrl.roll()">Click to Start!!!</button>
 	</div>
 </div>
