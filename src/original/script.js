@@ -1,3 +1,6 @@
+var dataArray;
+$.getJSON("src/rest-list.json", function(data){dataArray = data;});
+
 var restran = angular.module("restran", []);
 
 restran.directive("logo", function(){
@@ -14,42 +17,49 @@ restran.directive("main", function(){
 			controller: function(){
 //-----------------------------------------------------------------------------------------------------------------------------				
 var myself = this;
-var items = this.items = [];
+this.items = dataArray;
 var index = 0;
 var timer = 0;
-var isActive = false;
-var theItem;
-var theButton = document.getElementById("roll");
+var firstClick = true;
 var thePrompt = document.getElementById("thePrompt");
-$.getJSON("src/rest-list.json", function(data){items = data;});
+var l = this.items.length;
 
 this.roll = function(){
-		//To Do: Tell whether the queue is rolling, and start or stop the rolling respectively while changing the active state of the button.
-		if (!isActive)
-		{
-			theButton.setAttribute("class", "btn btn-danger btn-lg btn-block active");
-			isActive = true;
-			theButton.innerHTML="Click to Stop!!!";
-			myself.setTimer();
-		}
-		else
-		{
-			theButton.setAttribute("class", "btn btn-warning btn-lg btn-block disabled");
-			isActive = false;
-			clearTimeout(timer);
-			theItem.setAttribute("class", "item btn btn-success btn-lg btn-block");
-			document.getElementById("thePrompt").style.visibility="visible";
-			thePrompt.innerHTML="<strong>Well done!</strong> Now you can click on the green button to see the details of your restaurant.";
-			theButton.innerHTML="Click to Start!!!";
-		}}
+	myself.setId();
+	var myButton = $("#roll");
+
+	if (firstClick) {
+		myButton.html("Stop");
+		firstClick = false;
+		myButton.removeClass("btn-success");
+		myButton.addClass("btn-warning");
+		myself.setTimer();
+	} else {
+		myButton.addClass("disabled");
+		myButton.removeClass("btn-warning");
+		myButton.addClass("btn-danger");
+		myButton.html("Done");
+		clearTimeout(timer);
+		$("#" + (index + 1)).removeClass("btn-info").addClass("btn-success");
+		$("#thePrompt").html("<strong>Well done!</strong> Now you can click on the green button to see the details of your restaurant.");
+	}
+};
+
+this.setId = function(){
+	var first = $("#queue").children().first();
+	for (var i = 0; i < l; i++) {
+		first.attr("id", i);
+		first = first.next();
+	}
+};
 
 this.setTimer = function(){
 	$(".item").animate({top:"-=50"}, 50);
-	$("#" + (index % 4)).animate({top:"+=200"}, 0);					
-	$("#" + (index % 4)).html(items[(index + 4) % 39].name);
+	var command = "+=" + (39 * 50);
+	$("#" + (index % l)).animate({top:command}, 0);
 	index++;
-	theItem = document.getElementById("" + (index % 4 + 1) % 4);
-	timer = setTimeout(function(){myself.setTimer()},60)};
+	timer = setTimeout(function(){myself.setTimer()},60)
+};
 
 this.moreInfo = function(num) {
 	if (index!=0) num = (index + 1) % 39;
@@ -72,7 +82,8 @@ this.moreInfo = function(num) {
 
 	var infoWindow = new BMap.InfoWindow(content1, opts1);
 	marker.openInfoWindow(infoWindow);
-	marker.addEventListener('click',function(){ marker.openInfoWindow(infoWindow);});};
+	marker.addEventListener('click',function(){ marker.openInfoWindow(infoWindow);});
+};
 
 this.gotobaidu = function(type){
     if($.trim($("input[name=origin]").val())=="")
@@ -89,7 +100,8 @@ this.gotobaidu = function(type){
             $("input[name=mode]").val("driving");        
             $("#gotobaiduform")[0].submit();
         }
-    }}; 
+    }
+}; 
 //-----------------------------------------------------------------------------------------------------------------------------
 			},
 			controllerAs: "mCtrl"};
