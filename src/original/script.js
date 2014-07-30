@@ -41,8 +41,7 @@ this.roll = function(){
 			document.getElementById("thePrompt").style.visibility="visible";
 			thePrompt.innerHTML="<strong>Well done!</strong> Now you can click on the green button to see the details of your restaurant.";
 			theButton.innerHTML="Click to Start!!!";
-		}
-}
+		}}
 
 this.setTimer = function(){
 	$(".item").animate({top:"-=50"}, 50);
@@ -50,8 +49,7 @@ this.setTimer = function(){
 	$("#" + (index % 4)).html(items[(index + 4) % 39].name);
 	index++;
 	theItem = document.getElementById("" + (index % 4 + 1) % 4);
-	timer = setTimeout(function(){myself.setTimer()},60)
-};
+	timer = setTimeout(function(){myself.setTimer()},60)};
 
 this.moreInfo = function(num) {
 	if (index!=0) num = (index + 1) % 39;
@@ -67,58 +65,16 @@ this.moreInfo = function(num) {
 	var licontent="<b>"+items[num].name+"</b><br>";
 		licontent+="<span><strong>地址：</strong>"+items[num].addr+"</span><br>";
 		licontent+="<span><strong>电话：</strong>"+items[num].tel+"</span><br>";
-		licontent+="<span class=\"input\"><strong></strong><input class=\"outset\" type=\"text\" name=\"origin\" value=\"北京站\"/><input class=\"outset-but\" type=\"button\" value=\"公交\" onclick=\"gotobaidu(1)\" /><input class=\"outset-but\" type=\"button\" value=\"驾车\"  onclick=\"gotobaidu(2)\"/><a class=\"gotob\" href=\"url=\"http://api.map.baidu.com/direction?destination=latlng:"+marker.getPosition().lat+","+marker.getPosition().lng+"|name:"+items[num].name+"®ion=北京"+"&amp;output=html\" target=\"_blank\"></a></span>";
+		licontent+="<span class=\"input\"><strong></strong><input class=\"outset\" type=\"text\" name=\"origin\" value=\"北京站\"/><input class=\"outset-but\" type=\"button\" value=\"公交\" ng-click=\"mCtrl.gotobaidu(1)\" /><input class=\"outset-but\" type=\"button\" value=\"驾车\"  ng-click=\"mCtrl.gotobaidu(2)\"/><a class=\"gotob\" href=\"url=\"http://api.map.baidu.com/direction?destination=latlng:"+marker.getPosition().lat+","+marker.getPosition().lng+"|name:"+items[num].name+"®ion=北京"+"&amp;output=html\" target=\"_blank\"></a></span>";
 	var hiddeninput="<input type=\"hidden\" value=\""+'北京'+"\" name=\"region\" /><input type=\"hidden\" value=\"html\" name=\"output\" /><input type=\"hidden\" value=\"driving\" name=\"mode\" /><input type=\"hidden\" value=\"latlng:"+marker.getPosition().lat+","+marker.getPosition().lng+"|name:"+items[num].name+"\" name=\"destination\" />";
 	var content1 ="<form id=\"gotobaiduform\" action=\"http://api.map.baidu.com/direction\" target=\"_blank\" method=\"get\">" + licontent +hiddeninput+"</form>"; 
 	var opts1 = { width: 300 };
 
 	var infoWindow = new BMap.InfoWindow(content1, opts1);
 	marker.openInfoWindow(infoWindow);
-	marker.addEventListener('click',function(){ marker.openInfoWindow(infoWindow);});
-};
-//-----------------------------------------------------------------------------------------------------------------------------
-			},
-			controllerAs: "mCtrl"};
-});
+	marker.addEventListener('click',function(){ marker.openInfoWindow(infoWindow);});};
 
-restran.directive("footing", function(){
-	return {restrict: "E", templateUrl: "src/original/footing.html"};
-});
-
-restran.directive("modal", function(){
-	return {restrict: "E", templateUrl: "src/original/modal.html"};
-});
-
-/*
-function moreInfo(num) {
-	if (index!=0) num = (index + 1) % 39;
-	
-	document.getElementById("restName").innerHTML = items[num].name;
-	
-	//Baidu Map API
-	var map = new BMap.Map("container");
-	map.centerAndZoom(new BMap.Point(items[num].lat,items[num].lng), 13);
-	map.enableScrollWheelZoom();
-	var marker=new BMap.Marker(new BMap.Point(items[num].lat,items[num].lng));
-	map.addOverlay(marker);
-	var licontent="<b>"+items[num].name+"</b><br>";
-		licontent+="<span><strong>地址：</strong>"+items[num].addr+"</span><br>";
-		licontent+="<span><strong>电话：</strong>"+items[num].tel+"</span><br>";
-		licontent+="<span class=\"input\"><strong></strong><input class=\"outset\" type=\"text\" name=\"origin\" value=\"北京站\"/><input class=\"outset-but\" type=\"button\" value=\"公交\" onclick=\"gotobaidu(1)\" /><input class=\"outset-but\" type=\"button\" value=\"驾车\"  onclick=\"gotobaidu(2)\"/><a class=\"gotob\" href=\"url=\"http://api.map.baidu.com/direction?destination=latlng:"+marker.getPosition().lat+","+marker.getPosition().lng+"|name:"+items[num].name+"®ion=北京"+"&amp;output=html\" target=\"_blank\"></a></span>";
-	var hiddeninput="<input type=\"hidden\" value=\""+'北京'+"\" name=\"region\" /><input type=\"hidden\" value=\"html\" name=\"output\" /><input type=\"hidden\" value=\"driving\" name=\"mode\" /><input type=\"hidden\" value=\"latlng:"+marker.getPosition().lat+","+marker.getPosition().lng+"|name:"+items[num].name+"\" name=\"destination\" />";
-	var content1 ="<form id=\"gotobaiduform\" action=\"http://api.map.baidu.com/direction\" target=\"_blank\" method=\"get\">" + licontent +hiddeninput+"</form>"; 
-	var opts1 = { width: 300 };
-
-	var infoWindow = new BMap.InfoWindow(content1, opts1);
-	marker.openInfoWindow(infoWindow);
-	marker.addEventListener('click',function(){ marker.openInfoWindow(infoWindow);});
-};
-
-
-*/
-//Baidu Map API
-function gotobaidu(type)
-{
+this.gotobaidu = function(type){
     if($.trim($("input[name=origin]").val())=="")
     {
         alert("请输入起点！");
@@ -133,5 +89,16 @@ function gotobaidu(type)
             $("input[name=mode]").val("driving");        
             $("#gotobaiduform")[0].submit();
         }
-    }
-}   
+    }}; 
+//-----------------------------------------------------------------------------------------------------------------------------
+			},
+			controllerAs: "mCtrl"};
+});
+
+restran.directive("footing", function(){
+	return {restrict: "E", templateUrl: "src/original/footing.html"};
+});
+
+restran.directive("modal", function(){
+	return {restrict: "E", templateUrl: "src/original/modal.html"};
+});  
