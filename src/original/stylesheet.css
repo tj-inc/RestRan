@@ -1,3 +1,17 @@
+#logotext, #footing {
+	text-align: center;
+	margin: 10px;
+}
+
+hr {width: 400px;}
+
+#container {
+	margin:auto;
+	width:400px;
+	height:300px;
+	border:1px solid gray;
+}
+
 #edge {
 	margin: auto;
 	border: 5px solid black;

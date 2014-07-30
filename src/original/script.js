@@ -1,21 +1,26 @@
+//Fetch the JSON data of restaurants
 var dataArray;
 $.getJSON("src/rest-list.json", function(data){dataArray = data;});
 
+//Define the Angular Module
 var restran = angular.module("restran", []);
 
+//Logo part of webpage
 restran.directive("logo", function(){
 	return {restrict: "E", templateUrl: "src/original/logo.html"};
 });
 
+//Prompt part of webpage
 restran.directive("promptLine", function(){
 	return {restrict: "E", templateUrl: "src/original/prompt-line.html"};
 });
 
+//Main part of webpage
 restran.directive("main", function(){
 	return {restrict: "E", 
 			templateUrl: "src/original/main.html",
 			controller: function(){
-//-----------------------------------------------------------------------------------------------------------------------------				
+//Controller Functions-----------------------------------------------------------------------------
 var myself = this;
 this.items = dataArray;
 var index = 0;
@@ -31,16 +36,12 @@ this.roll = function(){
 	if (firstClick) {
 		myButton.html("Stop");
 		firstClick = false;
-		myButton.removeClass("btn-success");
-		myButton.addClass("btn-warning");
+		myButton.removeClass("btn-success").addClass("btn-warning");
 		myself.setTimer();
 	} else {
-		myButton.addClass("disabled");
-		myButton.removeClass("btn-warning");
-		myButton.addClass("btn-danger");
-		myButton.html("Done");
+		myButton.addClass("disabled").removeClass("btn-warning").addClass("btn-danger").html("Done");
 		clearTimeout(timer);
-		$("#" + (index + 1)).removeClass("btn-info").addClass("btn-success").removeClass("disabled");
+		$("#" + (index + 1) % l).removeClass("btn-info").addClass("btn-success").removeClass("disabled");
 		$("#thePrompt").html("<strong>Well done!</strong> Now you can click on the green button to see the details of your restaurant.");
 	}
 };
@@ -55,15 +56,14 @@ this.setId = function(){
 
 this.setTimer = function(){
 	$(".item").animate({top:"-=50"}, 50);
-	var command = "+=" + (39 * 50);
+	var command = "+=" + (l * 50);
 	$("#" + (index % l)).animate({top:command}, 0);
 	index++;
-	timer = setTimeout(function(){myself.setTimer()},60)
+	timer = setTimeout(function(){myself.setTimer()},60);
 };
 
 this.moreInfo = function() {
 	var num = (index + 1) % l;
-	
 	$("#restName").html(myself.items[num].name);
 	
 	//Baidu Map API
@@ -75,8 +75,8 @@ this.moreInfo = function() {
 	var licontent="<b>"+myself.items[num].name+"</b><br>";
 		licontent+="<span><strong>地址：</strong>"+myself.items[num].addr+"</span><br>";
 		licontent+="<span><strong>电话：</strong>"+myself.items[num].tel+"</span><br>";
-		licontent+="<span class=\"input\"><strong></strong><input class=\"outset\" type=\"text\" name=\"origin\" value=\"北京站\"/><input class=\"outset-but\" type=\"button\" value=\"公交\" ng-click=\"mCtrl.gotobaidu(1)\" /><input class=\"outset-but\" type=\"button\" value=\"驾车\"  ng-click=\"mCtrl.gotobaidu(2)\"/><a class=\"gotob\" href=\"url=\"http://api.map.baidu.com/direction?destination=latlng:"+marker.getPosition().lat+","+marker.getPosition().lng+"|name:"+myself.items[num].name+"®ion=北京"+"&amp;output=html\" target=\"_blank\"></a></span>";
-	var hiddeninput="<input type=\"hidden\" value=\""+'北京'+"\" name=\"region\" /><input type=\"hidden\" value=\"html\" name=\"output\" /><input type=\"hidden\" value=\"driving\" name=\"mode\" /><input type=\"hidden\" value=\"latlng:"+marker.getPosition().lat+","+marker.getPosition().lng+"|name:"+myself.items[num].name+"\" name=\"destination\" />";
+		licontent+="<span class=\"input\"><strong></strong><input class=\"outset\" type=\"text\" name=\"origin\" value=\"北京站\"/><input class=\"outset-but\" type=\"button\" value=\"公交\" ng-click=\"mCtrl.gotobaidu(1)\" /><input class=\"outset-but\" type=\"button\" value=\"驾车\" ng-click=\"mCtrl.gotobaidu(2)\"/><a class=\"gotob\" href=\"url=\"http://api.map.baidu.com/direction?destination=latlng:" + marker.getPosition().lat + "," + marker.getPosition().lng + "|name:" + myself.items[num].name + "®ion=北京" +"&amp;output=html\" target=\"_blank\"></a></span>";
+	var hiddeninput="<input type=\"hidden\" value=\""+'北京'+"\" name=\"region\" /><input type=\"hidden\" value=\"html\" name=\"output\" /><input type=\"hidden\" value=\"driving\" name=\"mode\" /><input type=\"hidden\" value=\"latlng:" + marker.getPosition().lat + "," + marker.getPosition().lng + "|name:" + myself.items[num].name + "\" name=\"destination\" />";
 	var content1 ="<form id=\"gotobaiduform\" action=\"http://api.map.baidu.com/direction\" target=\"_blank\" method=\"get\">" + licontent +hiddeninput+"</form>"; 
 	var opts1 = { width: 300 };
 
@@ -102,15 +102,17 @@ this.gotobaidu = function(type){
         }
     }
 }; 
-//-----------------------------------------------------------------------------------------------------------------------------
+//Functions end here-----------------------------------------------------------------------------
 			},
 			controllerAs: "mCtrl"};
 });
 
+//Footing part of webpage
 restran.directive("footing", function(){
 	return {restrict: "E", templateUrl: "src/original/footing.html"};
 });
 
+//Hidden Modal of webpage
 restran.directive("modal", function(){
 	return {restrict: "E", templateUrl: "src/original/modal.html"};
 });  
