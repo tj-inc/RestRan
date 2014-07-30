@@ -40,7 +40,7 @@ this.roll = function(){
 		myButton.addClass("btn-danger");
 		myButton.html("Done");
 		clearTimeout(timer);
-		$("#" + (index + 1)).removeClass("btn-info").addClass("btn-success");
+		$("#" + (index + 1)).removeClass("btn-info").addClass("btn-success").removeClass("disabled");
 		$("#thePrompt").html("<strong>Well done!</strong> Now you can click on the green button to see the details of your restaurant.");
 	}
 };
@@ -61,22 +61,22 @@ this.setTimer = function(){
 	timer = setTimeout(function(){myself.setTimer()},60)
 };
 
-this.moreInfo = function(num) {
-	if (index!=0) num = (index + 1) % 39;
+this.moreInfo = function() {
+	var num = (index + 1) % l;
 	
-	document.getElementById("restName").innerHTML = items[num].name;
+	$("#restName").html(myself.items[num].name);
 	
 	//Baidu Map API
 	var map = new BMap.Map("container");
-	map.centerAndZoom(new BMap.Point(items[num].lat,items[num].lng), 13);
+	map.centerAndZoom(new BMap.Point(myself.items[num].lat,myself.items[num].lng), 13);
 	map.enableScrollWheelZoom();
-	var marker=new BMap.Marker(new BMap.Point(items[num].lat,items[num].lng));
+	var marker=new BMap.Marker(new BMap.Point(myself.items[num].lat,myself.items[num].lng));
 	map.addOverlay(marker);
-	var licontent="<b>"+items[num].name+"</b><br>";
-		licontent+="<span><strong>地址：</strong>"+items[num].addr+"</span><br>";
-		licontent+="<span><strong>电话：</strong>"+items[num].tel+"</span><br>";
-		licontent+="<span class=\"input\"><strong></strong><input class=\"outset\" type=\"text\" name=\"origin\" value=\"北京站\"/><input class=\"outset-but\" type=\"button\" value=\"公交\" ng-click=\"mCtrl.gotobaidu(1)\" /><input class=\"outset-but\" type=\"button\" value=\"驾车\"  ng-click=\"mCtrl.gotobaidu(2)\"/><a class=\"gotob\" href=\"url=\"http://api.map.baidu.com/direction?destination=latlng:"+marker.getPosition().lat+","+marker.getPosition().lng+"|name:"+items[num].name+"®ion=北京"+"&amp;output=html\" target=\"_blank\"></a></span>";
-	var hiddeninput="<input type=\"hidden\" value=\""+'北京'+"\" name=\"region\" /><input type=\"hidden\" value=\"html\" name=\"output\" /><input type=\"hidden\" value=\"driving\" name=\"mode\" /><input type=\"hidden\" value=\"latlng:"+marker.getPosition().lat+","+marker.getPosition().lng+"|name:"+items[num].name+"\" name=\"destination\" />";
+	var licontent="<b>"+myself.items[num].name+"</b><br>";
+		licontent+="<span><strong>地址：</strong>"+myself.items[num].addr+"</span><br>";
+		licontent+="<span><strong>电话：</strong>"+myself.items[num].tel+"</span><br>";
+		licontent+="<span class=\"input\"><strong></strong><input class=\"outset\" type=\"text\" name=\"origin\" value=\"北京站\"/><input class=\"outset-but\" type=\"button\" value=\"公交\" ng-click=\"mCtrl.gotobaidu(1)\" /><input class=\"outset-but\" type=\"button\" value=\"驾车\"  ng-click=\"mCtrl.gotobaidu(2)\"/><a class=\"gotob\" href=\"url=\"http://api.map.baidu.com/direction?destination=latlng:"+marker.getPosition().lat+","+marker.getPosition().lng+"|name:"+myself.items[num].name+"®ion=北京"+"&amp;output=html\" target=\"_blank\"></a></span>";
+	var hiddeninput="<input type=\"hidden\" value=\""+'北京'+"\" name=\"region\" /><input type=\"hidden\" value=\"html\" name=\"output\" /><input type=\"hidden\" value=\"driving\" name=\"mode\" /><input type=\"hidden\" value=\"latlng:"+marker.getPosition().lat+","+marker.getPosition().lng+"|name:"+myself.items[num].name+"\" name=\"destination\" />";
 	var content1 ="<form id=\"gotobaiduform\" action=\"http://api.map.baidu.com/direction\" target=\"_blank\" method=\"get\">" + licontent +hiddeninput+"</form>"; 
 	var opts1 = { width: 300 };
 

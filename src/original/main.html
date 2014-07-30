@@ -7,8 +7,8 @@
 	<div class="col-md-4">
 		<div id="edge">
 			<div id="queue">
-				<button class="item btn btn-info btn-lg btn-block disabled" data-toggle="modal" 
-				data-target="#myModal" ng-repeat="item in mCtrl.items" style="margin:auto;">{{item.name}}</button>
+				<button class="item btn btn-info btn-lg btn-block disabled" data-toggle="modal" data-target="#myModal"
+				 ng-repeat="item in mCtrl.items" style="margin:auto;" ng-click="mCtrl.moreInfo()">{{item.name}}</button>
 			</div>
 		</div>
 	</div>
