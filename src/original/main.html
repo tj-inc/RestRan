@@ -1,4 +1,12 @@
-<div id="main" class="row">
+<div id="theFilter">
+	<select ng-model="restFilter" >
+		<option value="">都可以</option>
+		<option value="true">中餐</option>
+		<option value="false">西餐</option>
+	</select>
+	<button id="NextStep">下一步</button>
+</div>
+<div id="main" class="row StepTwo hidden">
 	<div class="col-md-3">
 	</div>
 	<div class="col-md-1">
@@ -19,8 +27,17 @@
 	</div>
 </div>
 
-<div class="row" style="margin-top:10px;">
+<div class="row StepTwo hidden" style="margin-top:10px;">
 	<div id="button" class="col-md-4 col-md-offset-4">
 		<button class="btn btn-success btn-lg btn-block" id="roll" ng-click="mCtrl.roll()">Start</button>
 	</div>
 </div>
+<script>
+//Filter Div "Next-Step" Button
+$(document).ready(function(){
+	$("#NextStep").on("click",function(){
+		$("#theFilter").addClass("hidden");
+		$(".StepTwo").removeClass("hidden")
+	});
+});
+</script>
