@@ -1,78 +1,89 @@
+//Fetch the JSON data of restaurants
+var dataArray;
+$.getJSON("src/rest-list.json", function(data){dataArray = data;});
+
+//Define the Angular Module
 var restran = angular.module("restran", []);
 
+//Logo part of webpage
 restran.directive("logo", function(){
 	return {restrict: "E", templateUrl: "src/original/logo.html"};
 });
 
+//Prompt part of webpage
 restran.directive("promptLine", function(){
 	return {restrict: "E", templateUrl: "src/original/prompt-line.html"};
 });
 
+//Main part of webpage
 restran.directive("main", function(){
 	return {restrict: "E", 
 			templateUrl: "src/original/main.html",
 			controller: function(){
-//-----------------------------------------------------------------------------------------------------------------------------				
+//Controller Functions-----------------------------------------------------------------------------
 var myself = this;
-var items = this.items = [];
+this.items = dataArray;
 var index = 0;
 var timer = 0;
-var isActive = false;
-var theItem;
-var theButton = document.getElementById("roll");
+var firstClick = true;
 var thePrompt = document.getElementById("thePrompt");
-$.getJSON("src/rest-list.json", function(data){items = data;});
+var l = this.items.length;
 
 this.roll = function(){
-		//To Do: Tell whether the queue is rolling, and start or stop the rolling respectively while changing the active state of the button.
-		if (!isActive)
-		{
-			theButton.setAttribute("class", "btn btn-danger btn-lg btn-block active");
-			isActive = true;
-			theButton.innerHTML="Click to Stop!!!";
-			myself.setTimer();
-		}
-		else
-		{
-			theButton.setAttribute("class", "btn btn-warning btn-lg btn-block disabled");
-			isActive = false;
-			clearTimeout(timer);
-			theItem.setAttribute("class", "item btn btn-success btn-lg btn-block");
-			document.getElementById("thePrompt").style.visibility="visible";
-			thePrompt.innerHTML="<strong>Well done!</strong> Now you can click on the green button to see the details of your restaurant.";
-			theButton.innerHTML="Click to Start!!!";
-		}}
+	myself.setId();
+	var myButton = $("#roll");
+
+	if (firstClick) {
+		myButton.html("Stop");
+		firstClick = false;
+		myButton.removeClass("btn-success").addClass("btn-warning");
+		myself.setTimer();
+	} else {
+		myButton.addClass("disabled").removeClass("btn-warning").addClass("btn-danger").html("Done");
+		clearTimeout(timer);
+		$("#" + (index + 1) % l).removeClass("btn-info").addClass("btn-success").removeClass("disabled");
+		$("#thePrompt").html("<strong>Well done!</strong> Now you can click on the green button to see the details of your restaurant.");
+	}
+};
+
+this.setId = function(){
+	var first = $("#queue").children().first();
+	for (var i = 0; i < l; i++) {
+		first.attr("id", i);
+		first = first.next();
+	}
+};
 
 this.setTimer = function(){
 	$(".item").animate({top:"-=50"}, 50);
-	$("#" + (index % 4)).animate({top:"+=200"}, 0);					
-	$("#" + (index % 4)).html(items[(index + 4) % 39].name);
+	var command = "+=" + (l * 50);
+	$("#" + (index % l)).animate({top:command}, 0);
 	index++;
-	theItem = document.getElementById("" + (index % 4 + 1) % 4);
-	timer = setTimeout(function(){myself.setTimer()},60)};
+	timer = setTimeout(function(){myself.setTimer()},60);
+};
 
-this.moreInfo = function(num) {
-	if (index!=0) num = (index + 1) % 39;
-	
-	document.getElementById("restName").innerHTML = items[num].name;
+this.moreInfo = function() {
+	var num = (index + 1) % l;
+	$("#restName").html(myself.items[num].name);
 	
 	//Baidu Map API
 	var map = new BMap.Map("container");
-	map.centerAndZoom(new BMap.Point(items[num].lat,items[num].lng), 13);
+	map.centerAndZoom(new BMap.Point(myself.items[num].lat,myself.items[num].lng), 13);
 	map.enableScrollWheelZoom();
-	var marker=new BMap.Marker(new BMap.Point(items[num].lat,items[num].lng));
+	var marker=new BMap.Marker(new BMap.Point(myself.items[num].lat,myself.items[num].lng));
 	map.addOverlay(marker);
-	var licontent="<b>"+items[num].name+"</b><br>";
-		licontent+="<span><strong>地址：</strong>"+items[num].addr+"</span><br>";
-		licontent+="<span><strong>电话：</strong>"+items[num].tel+"</span><br>";
-		licontent+="<span class=\"input\"><strong></strong><input class=\"outset\" type=\"text\" name=\"origin\" value=\"北京站\"/><input class=\"outset-but\" type=\"button\" value=\"公交\" ng-click=\"mCtrl.gotobaidu(1)\" /><input class=\"outset-but\" type=\"button\" value=\"驾车\"  ng-click=\"mCtrl.gotobaidu(2)\"/><a class=\"gotob\" href=\"url=\"http://api.map.baidu.com/direction?destination=latlng:"+marker.getPosition().lat+","+marker.getPosition().lng+"|name:"+items[num].name+"®ion=北京"+"&amp;output=html\" target=\"_blank\"></a></span>";
-	var hiddeninput="<input type=\"hidden\" value=\""+'北京'+"\" name=\"region\" /><input type=\"hidden\" value=\"html\" name=\"output\" /><input type=\"hidden\" value=\"driving\" name=\"mode\" /><input type=\"hidden\" value=\"latlng:"+marker.getPosition().lat+","+marker.getPosition().lng+"|name:"+items[num].name+"\" name=\"destination\" />";
+	var licontent="<b>"+myself.items[num].name+"</b><br>";
+		licontent+="<span><strong>地址：</strong>"+myself.items[num].addr+"</span><br>";
+		licontent+="<span><strong>电话：</strong>"+myself.items[num].tel+"</span><br>";
+		licontent+="<span class=\"input\"><strong></strong><input class=\"outset\" type=\"text\" name=\"origin\" value=\"北京站\"/><input class=\"outset-but\" type=\"button\" value=\"公交\" ng-click=\"mCtrl.gotobaidu(1)\" /><input class=\"outset-but\" type=\"button\" value=\"驾车\" ng-click=\"mCtrl.gotobaidu(2)\"/><a class=\"gotob\" href=\"url=\"http://api.map.baidu.com/direction?destination=latlng:" + marker.getPosition().lat + "," + marker.getPosition().lng + "|name:" + myself.items[num].name + "®ion=北京" +"&amp;output=html\" target=\"_blank\"></a></span>";
+	var hiddeninput="<input type=\"hidden\" value=\""+'北京'+"\" name=\"region\" /><input type=\"hidden\" value=\"html\" name=\"output\" /><input type=\"hidden\" value=\"driving\" name=\"mode\" /><input type=\"hidden\" value=\"latlng:" + marker.getPosition().lat + "," + marker.getPosition().lng + "|name:" + myself.items[num].name + "\" name=\"destination\" />";
 	var content1 ="<form id=\"gotobaiduform\" action=\"http://api.map.baidu.com/direction\" target=\"_blank\" method=\"get\">" + licontent +hiddeninput+"</form>"; 
 	var opts1 = { width: 300 };
 
 	var infoWindow = new BMap.InfoWindow(content1, opts1);
 	marker.openInfoWindow(infoWindow);
-	marker.addEventListener('click',function(){ marker.openInfoWindow(infoWindow);});};
+	marker.addEventListener('click',function(){ marker.openInfoWindow(infoWindow);});
+};
 
 this.gotobaidu = function(type){
     if($.trim($("input[name=origin]").val())=="")
@@ -89,16 +100,19 @@ this.gotobaidu = function(type){
             $("input[name=mode]").val("driving");        
             $("#gotobaiduform")[0].submit();
         }
-    }}; 
-//-----------------------------------------------------------------------------------------------------------------------------
+    }
+}; 
+//Functions end here-----------------------------------------------------------------------------
 			},
 			controllerAs: "mCtrl"};
 });
 
+//Footing part of webpage
 restran.directive("footing", function(){
 	return {restrict: "E", templateUrl: "src/original/footing.html"};
 });
 
+//Hidden Modal of webpage
 restran.directive("modal", function(){
 	return {restrict: "E", templateUrl: "src/original/modal.html"};
 });  
