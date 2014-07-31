@@ -144,7 +144,7 @@
 },
 
 {
-      "chinese":true,
+      "chinese":false,
       "name":"Coco茶饮",
       "lat":"116.473753",
       "lng":"39.962129",

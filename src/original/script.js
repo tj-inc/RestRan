@@ -19,7 +19,9 @@ restran.directive("promptLine", function(){
 restran.directive("main", function(){
 	return {restrict: "E", 
 			templateUrl: "src/original/main.html",
-			controller: function(){
+			controller: function($scope){
+//Initializing filter-----------------------------------------------------------------------------
+this.restFilter="";
 //Controller Functions-----------------------------------------------------------------------------
 var myself = this;
 this.items = dataArray;
@@ -27,7 +29,7 @@ var index = 0;
 var timer = 0;
 var firstClick = true;
 var thePrompt = document.getElementById("thePrompt");
-var l = this.items.length;
+var l = 0;
 
 this.roll = function(){
 	myself.setId();
@@ -101,7 +103,16 @@ this.gotobaidu = function(type){
             $("#gotobaiduform")[0].submit();
         }
     }
-}; 
+};
+
+//Filter Div "Next-Step" Button
+this.nextStep = function(){
+	$("#theFilter").addClass("hidden");
+	$(".StepTwo").removeClass("hidden");
+	$scope.$watch('filteredList',function(){
+	l = $scope.filteredList.length;
+},true);
+};
 //Functions end here-----------------------------------------------------------------------------
 			},
 			controllerAs: "mCtrl"};
