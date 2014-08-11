@@ -1,0 +1,40 @@
+#logotext, #footing {
+	text-align: center;
+	margin: 10px;
+}
+
+hr {width: 400px;}
+
+#container {
+	margin:auto;
+	width:400px;
+	height:300px;
+	border:1px solid gray;
+}
+
+#edge {
+	margin: auto;
+	border: 5px solid black;
+	height: 160px;
+	overflow: hidden;
+}
+
+#queue {
+	margin: auto;
+	z-index: -1;
+}
+
+.item {
+	height: 50px;
+	position: relative;
+}
+
+#left {
+	top:75px;
+	float:left;
+}
+
+#right {
+	top:75px;
+	float:right;
+}
