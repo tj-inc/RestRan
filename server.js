@@ -12,7 +12,9 @@ app.use(function(req, res, next){
 app.use(express.static(__dirname + "/app"));
 
 app.use(function(req, res, next){
+
     if(req.url == "/rest-list.json") {
+
         mongoose.connect("mongodb://localhost/test");
         var db = mongoose.connection;
         db.on("error", console.error.bind(console, "DataBase Connection Error: "));
@@ -35,11 +37,14 @@ app.use(function(req, res, next){
                 if (err) console.error(err);
                 console.log("DataBase Querying Success!");
                 res.send(rests);
+                mongoose.disconnect();
             });
         });
+
     } else {
         next();
     }
+
 });
 
 app.listen(3000);
