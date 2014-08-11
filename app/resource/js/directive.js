@@ -12,8 +12,7 @@ restran.directive("promptLine", function(){
 restran.directive("main", function(){
     return {restrict: "E",
         templateUrl: "./resource/partials/main.html",
-        controller: mainControl,
-        controllerAs: "mCtrl"};
+        controller: mainControl};
 });
 
 //Footing part of webpage

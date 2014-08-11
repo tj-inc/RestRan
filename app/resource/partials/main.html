@@ -5,7 +5,7 @@
 		<option value="false">西餐</option>
 	</select>
 	<br>
-	<button id="NextStep" class="btn btn-success center-block" ng-click="mCtrl.nextStep()">下一步</button>
+	<button id="NextStep" class="btn btn-success center-block" ng-click="nextStep()">下一步</button>
 	<br>
 </div>
 <div id="main" class="row StepTwo hidden">
@@ -18,7 +18,7 @@
 		<div id="edge">
 			<div id="queue">
 				<button class="item btn btn-info btn-lg btn-block disabled" data-toggle="modal" data-target="#myModal"
-				 ng-repeat="item in filteredList = (mCtrl.items|filter:{'chinese':restFilter})" style="margin:auto;" ng-click="mCtrl.moreInfo()">{{item.name}}</button>
+				 ng-repeat="item in filteredList = (items|filter:{'chinese':restFilter})" style="margin:auto;" ng-click="moreInfo()">{{item.name}}</button>
 			</div>
 		</div>
 	</div>
@@ -31,6 +31,6 @@
 
 <div class="row StepTwo hidden" style="margin-top:10px;">
 	<div id="button" class="col-md-4 col-md-offset-4">
-		<button class="btn btn-success btn-lg btn-block" id="roll" ng-click="mCtrl.roll()">Start</button>
+		<button class="btn btn-success btn-lg btn-block" id="roll" ng-click="roll()">Start</button>
 	</div>
 </div>

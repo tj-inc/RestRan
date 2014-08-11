@@ -1,24 +1,22 @@
 var mainControl = function($scope) {
-//Initializing filter-----------------------------------------------------------------------------
-    this.restFilter = "";
-//Controller Functions-----------------------------------------------------------------------------
-    var myself = this;
-    this.items = dataArray;
+
+    var restFilter = "";
+    $scope.items = dataArray;
     var index = 0;
     var timer = 0;
     var firstClick = true;
     var thePrompt = document.getElementById("thePrompt");
     var l = 0;
 
-    this.roll = function () {
-        myself.setId();
+    $scope.roll = function () {
+        $scope.setId();
         var myButton = $("#roll");
 
         if (firstClick) {
             myButton.html("Stop");
             firstClick = false;
             myButton.removeClass("btn-success").addClass("btn-warning");
-            myself.setTimer();
+            $scope.setTimer();
         } else {
             myButton.addClass("disabled").removeClass("btn-warning").addClass("btn-danger").html("Done");
             clearTimeout(timer);
@@ -27,7 +25,7 @@ var mainControl = function($scope) {
         }
     };
 
-    this.setId = function () {
+    $scope.setId = function () {
         var first = $("#queue").children().first();
         for (var i = 0; i < l; i++) {
             first.attr("id", i);
@@ -35,17 +33,17 @@ var mainControl = function($scope) {
         }
     };
 
-    this.setTimer = function () {
+    $scope.setTimer = function () {
         $(".item").animate({top: "-=50"}, 50);
         var command = "+=" + (l * 50);
         $("#" + (index % l)).animate({top: command}, 0);
         index++;
         timer = setTimeout(function () {
-            myself.setTimer()
+            $scope.setTimer()
         }, 60);
     };
 
-    this.moreInfo = function () {
+    $scope.moreInfo = function () {
         var num = (index + 1) % l;
         $("#restName").html($scope.filteredList[num].name);
 
@@ -70,7 +68,7 @@ var mainControl = function($scope) {
         });
     };
 
-    this.gotobaidu = function (type) {
+    $scope.gotobaidu = function (type) {
         if ($.trim($("input[name=origin]").val()) == "") {
             alert("请输入起点！");
             return;
@@ -85,13 +83,12 @@ var mainControl = function($scope) {
         }
     };
 
-//Filter Div "Next-Step" Button
-    this.nextStep = function () {
+    $scope.nextStep = function () {
         $("#theFilter").addClass("hidden");
         $(".StepTwo").removeClass("hidden");
         $scope.$watch('filteredList', function () {
             l = $scope.filteredList.length;
         }, true);
     };
-//Functions end here-----------------------------------------------------------------------------
+
 };
