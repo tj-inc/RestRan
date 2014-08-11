@@ -1,14 +1,9 @@
 var http = require('http');
-var fs = require('fs');
-var server = http.createServer();
+var express = require('express');
+var app = express();
 
-server.on('request', function(request, response){
-	response.writeHead(200);
-	var url = request.url;
-	url = (url == "/") ? "./index.html" : "." + url;
-	console.log(url);
-	var prep = fs.createReadStream(url);
-	prep.pipe(response);
-}).listen(8000);
+app.use(express.static(__dirname + '/app'));
 
-console.log("server is running on 8000!");
+app.listen(3000);
+
+console.log("server is running on 3000!");
