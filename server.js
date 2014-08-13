@@ -1,11 +1,16 @@
+//Required Services
 var http = require("http");
 var fs = require("fs");
 var express = require("express");
 var mongoose = require("mongoose");
-var app = express();
-var data1;
 
-function getDataFromDB(){
+//Global Variables
+var app = express();
+var data;
+var restModel;
+
+//Initialize DataBase
+function initDB(){
     mongoose.connect("mongodb://localhost/test");
     var db = mongoose.connection;
     db.on("error", console.error.bind(console, "DataBase Connection Error: "));
@@ -22,18 +27,11 @@ function getDataFromDB(){
 
         restSchema.set("toJSON");
 
-        var restModel = mongoose.model("restrans", restSchema);
-
-        restModel.find(function(err, rests){
-            if (err) console.error(err);
-            console.log("DataBase Querying Success!");
-            data1 = rests;
-            mongoose.disconnect();
-        });
+        restModel = mongoose.model("restrans", restSchema);
     });
 };
 
-getDataFromDB();
+initDB();
 
 app.use(function(req, res, next){
     console.log("%s %s", req.method, req.url);
@@ -46,8 +44,11 @@ app.use(function(req, res, next){
 
     if(req.url == "/rest-list.json") {
 
-        console.log(data1);
-        res.send(data1);
+        restModel.find(function(err, rests){
+            if (err) console.error(err);
+            console.log("DataBase Querying Success!");
+            res.send(rests);
+        });
 
     } else {
         next();
