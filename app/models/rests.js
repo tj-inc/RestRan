@@ -13,4 +13,4 @@ var restSchema = mongoose.Schema({
     "tel": String
 });
 
-mongoose.model("restrans", restSchema);
+exports.restModel = mongoose.model("restrans", restSchema);
