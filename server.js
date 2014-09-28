@@ -2,8 +2,6 @@
  * Created by lijiahang on 14-8-11.
  */
 
-var http = require("http");
-var fs = require("fs");
 var express = require("express");
 var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
@@ -26,3 +24,4 @@ var server = app.listen(3000, function(){
 });
 
 module.exports = app;
+
